@@ -1,0 +1,42 @@
+{
+    "languageserver": {
+        "dockerfile": {
+            "command": "docker-langserver",
+            "filetypes": ["dockerfile"],
+            "args": ["--stdio"]
+        },
+
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"]
+         },
+        
+        "rust": {
+            "command": "rust-analyzer",
+            "filetypes": ["rust"],
+            "rootPatterns": ["Cargo.toml"]
+        },
+
+        "csharp-ls": {
+          "command": "csharp-ls",
+          "filetypes": ["cs"],
+          "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
+        },
+
+        "sql": {
+            "command": "sql-language-server",
+            "args" : ["up", "--method", "stdio"],
+            "filetypes": ["sql", "mysql"]
+        },
+
+        "intelephense": {
+            "command": "intelephense",
+            "args": ["--stdio"],
+            "filetypes": ["php"],
+            "initializationOptions": {
+                "storagePath": "/tmp/intelephense"
+            }
+        }
+    }
+}
