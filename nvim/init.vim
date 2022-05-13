@@ -29,7 +29,7 @@ source ~/.config/nvim/plugins.vim
 let g:gruvbox_contrast_dark = 'hard'
 autocmd vimenter * ++nested colorscheme gruvbox
 set autoread
-set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set relativenumber
 set tabstop     =4
