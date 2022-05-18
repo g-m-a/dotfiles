@@ -43,6 +43,11 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+nnoremap <leader>ca <Plug>(coc-codeaction)
+nnoremap <leader>cl  <Plug>(coc-codelens-action)
+nnoremap <leader>cf  <Plug>(coc-fix-current)
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 

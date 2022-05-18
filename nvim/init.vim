@@ -32,6 +32,7 @@ set autoread
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow\ --hidden
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set relativenumber
+set number
 set tabstop     =4
 set softtabstop =4
 set shiftwidth  =4
