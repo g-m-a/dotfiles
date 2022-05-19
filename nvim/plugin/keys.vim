@@ -84,6 +84,21 @@ nnoremap <leader>fm <cmd>Telescope harpoon marks<cr>
 nnoremap <leader>m <cmd>lua require("harpoon.mark").add_file()<CR>
 nnoremap <leader>mm <cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>
 
+" NerdTree
+nnoremap <C-b> :NERDTreeToggle<CR>
+
+" buffers
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+
+" immediate to mark
+nnoremap <leader>g1 <cmd>lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>g2 <cmd>lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>g3 <cmd>lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>g4 <cmd>lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <leader>g5 <cmd>lua require("harpoon.ui").nav_file(5)<CR>
+
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'

@@ -40,4 +40,7 @@ Plug 'simrat39/symbols-outline.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'antoinemadec/coc-fzf'
 
+" NerdTree
+Plug 'preservim/nerdtree'
+
 call plug#end()
