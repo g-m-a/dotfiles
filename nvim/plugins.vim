@@ -43,4 +43,6 @@ Plug 'antoinemadec/coc-fzf'
 " NerdTree
 Plug 'preservim/nerdtree'
 
+" Vimspector
+Plug 'puremourning/vimspector'
 call plug#end()
