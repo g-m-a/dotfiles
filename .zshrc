@@ -1,5 +1,6 @@
 [[ $- != *i* ]] && return
 
+export PATH="$HOME/.local/bin:$PATH"
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -38,6 +39,8 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 alias kubectl="minikube kubectl --"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
@@ -47,9 +50,20 @@ export NVM_DIR="$HOME/.nvm"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="gnzh"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-plugins=(git)
+plugins=(git fzf-zsh-plugin)
 
 source $ZSH/oh-my-zsh.sh
+
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# bun completions
+[ -s "/home/adi/.bun/_bun" ] && source "/home/adi/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
@@ -61,3 +75,14 @@ export EDITOR=vnim
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+VIM="nvim"
+
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
+export GIT_EDITOR=$VIM
+
+bindkey -s ^f "tmux-sessionizer\n"
+
+source "$HOME/.cargo/env"

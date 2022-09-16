@@ -21,7 +21,8 @@ Plug 'ThePrimeagen/harpoon'
 Plug 'sbdchd/neoformat'
 
 " fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " copilot
