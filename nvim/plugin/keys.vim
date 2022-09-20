@@ -98,6 +98,7 @@ nnoremap <leader>g3 <cmd>lua require("harpoon.ui").nav_file(3)<CR>
 nnoremap <leader>g4 <cmd>lua require("harpoon.ui").nav_file(4)<CR>
 nnoremap <leader>g5 <cmd>lua require("harpoon.ui").nav_file(5)<CR>
 
+xnoremap <leader>p "_dP
 
 function! s:check_back_space() abort
   let col = col('.') - 1

@@ -50,7 +50,7 @@ export NVM_DIR="$HOME/.nvm"
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="gnzh"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-plugins=(git fzf-zsh-plugin)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,8 +78,8 @@ export LANG=en_US.UTF-8
 
 VIM="nvim"
 
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completion.zsh ] && source /usr/share/doc/fzf/examples/completion.zsh
 
 export GIT_EDITOR=$VIM
 
