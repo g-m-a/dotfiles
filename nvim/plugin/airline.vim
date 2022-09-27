@@ -14,7 +14,7 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_section_c='%{nvim_treesitter#statusline()}'
+let g:airline_section_c='%{nvim_treesitter#statusline()} | %F'
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "----------- fonts & shits 
 " unicode symbols
