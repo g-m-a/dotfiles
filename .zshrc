@@ -43,9 +43,9 @@ alias kubectl="minikube kubectl --"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="gnzh"
@@ -54,12 +54,8 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-# bun completions
-[ -s "/home/adi/.bun/_bun" ] && source "/home/adi/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -70,7 +66,7 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
 export VISUAL=nvim
-export EDITOR=vnim
+export EDITOR=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export LC_ALL=en_US.UTF-8
@@ -87,10 +83,37 @@ bindkey -s ^f "tmux-sessionizer\n"
 
 source "$HOME/.cargo/env"
 
-PATH="/Users/adriangabrielli/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/adriangabrielli/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/adriangabrielli/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/adriangabrielli/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/adriangabrielli/perl5"; export PERL_MM_OPT;
+# PATH="/Users/adriangabrielli/perl5/bin${PATH:+:${PATH}}"; export PATH;
+# PERL5LIB="/Users/adriangabrielli/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+# PERL_LOCAL_LIB_ROOT="/Users/adriangabrielli/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+# PERL_MB_OPT="--install_base \"/Users/adriangabrielli/perl5\""; export PERL_MB_OPT;
+# PERL_MM_OPT="INSTALL_BASE=/Users/adriangabrielli/perl5"; export PERL_MM_OPT;
+
+# export CPPFLAGS="-I$(brew --prefix)/include"
+# export LDFLAGS="-L$(brew --prefix)/lib"
 
 [ -f ~/.env.zsh ] && source ~/.env.zsh
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# bun completions
+[ -s "/Users/adriangabrielli/.bun/_bun" ] && source "/Users/adriangabrielli/.bun/_bun"
+
+# brew completions
+[ -s "/opt/homebrew/share/zsh/site-functions/_brew" ] && fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+# brew arch switch
+alias armbrew='eval "$(/opt/homebrew/bin/brew shellenv)"' 
+alias x86brew='eval "$(/usr/local/bin/brew shellenv)"'
+
+# export PATH="/usr/local/opt/game-porting-toolkit/bin:$PATH"
+# alias gw2="x86brew; arch -x86_64  gameportingtoolkit ~/gw2 'C:/users/crossover/Desktop/Guild Wars 2/Gw2-64.exe'"
+
+# pnpm
+export PNPM_HOME="/Users/adriangabrielli/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
