@@ -5,7 +5,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Projects/work ~/Projects/learning ~/.config -mindepth 1 -maxdepth 2 -type d 2>/dev/null | fzf)
+    selected=$(find -L ~/Projects/work ~/Projects/learning ~/.config -mindepth 1 -maxdepth 2 -type d 2>/dev/null | fzf)
 fi
 
 if [[ -z $selected ]]; then
