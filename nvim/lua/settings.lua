@@ -46,3 +46,24 @@ vim.o.splitright = true
 vim.o.smarttab = true
 vim.o.grepprg = "rg --vimgrep --smart-case --follow --hidden --no-ignore-vcs --no-ignore --no-ignore-global --no-ignore-parent"
 vim.o.autoread = true
+
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = "*",
+  desc = "Disable syntax highlighting in files larger than 1MB",
+  callback = function(args)
+    local highlighter = require "vim.treesitter.highlighter"
+    local ts_was_active = highlighter.active[args.buf]
+    local file_size = vim.fn.getfsize(args.file)
+    if (file_size > 1024 * 1024) then
+      vim.cmd("TSBufDisable highlight")
+      vim.cmd("syntax off")
+      vim.cmd("syntax clear")
+      vim.cmd("IlluminatePauseBuf")
+      vim.cmd("NoMatchParen")
+      vim.cmd("TSContextEnable")
+      if (ts_was_active) then
+	vim.notify("File larger than 1MB, turned off syntax highlighting")
+      end
+    end
+  end
+})
