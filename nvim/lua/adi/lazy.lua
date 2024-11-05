@@ -19,6 +19,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
     },
+    lazy = true
   },
   {
     "folke/lazydev.nvim",
@@ -31,12 +32,14 @@ require('lazy').setup({
       { path = "LazyVim", words = { "LazyVim" } }, -- See the configuration section for more details
       },
     },
+   lazy = true
   },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
     },
+   lazy = true
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -47,23 +50,26 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ":TSUpdate",
+    lazy = true
   },
-  'nvim-treesitter/nvim-treesitter-context',
-  'lewis6991/gitsigns.nvim',
-  "ellisonleao/gruvbox.nvim",
-  'nvim-lualine/lualine.nvim',
+  {'nvim-treesitter/nvim-treesitter-context', lazy = true},
+  {'lewis6991/gitsigns.nvim', lazy = true},
+  {'ellisonleao/gruvbox.nvim', lazy = true},
+  {'nvim-lualine/lualine.nvim', lazy = true},
   {
     'nvim-telescope/telescope.nvim',
     version = '*',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    lazy = true
   },
-  'ThePrimeagen/harpoon',
+  {'ThePrimeagen/harpoon', lazy = true},
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make',
     cond = function()
       return vim.fn.executable 'make' == 1
     end,
+    lazy = true
   },
   {
     "zbirenbaum/copilot.lua",
@@ -98,8 +104,9 @@ require('lazy').setup({
         },
       },
     },
+    lazy = true
   },
-  { "mg979/vim-visual-multi", branch= "master"},
+  { "mg979/vim-visual-multi", branch= "master" },
   {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -113,8 +120,10 @@ require('lazy').setup({
         build = "npm ci && npm run compile vsDebugServerBundle && rm -rf out/dist && mv dist out && git reset --hard"
       }
     },
+    lazy = true
   },
   {
-    "RRethy/vim-illuminate"
+    "RRethy/vim-illuminate",
+    lazy = true
   }
 }, {})
