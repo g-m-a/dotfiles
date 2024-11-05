@@ -18,7 +18,18 @@ require('lazy').setup({
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
-      'folke/neodev.nvim',
+    },
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+       -- always load the LazyVim library
+      "LazyVim",
+      -- Only load the lazyvim library when the `LazyVim` global is found
+      { path = "LazyVim", words = { "LazyVim" } }, -- See the configuration section for more details
+      },
     },
   },
   { -- Autocompletion
@@ -38,12 +49,9 @@ require('lazy').setup({
     build = ":TSUpdate",
   },
   'nvim-treesitter/nvim-treesitter-context',
-  'tpope/vim-fugitive',
   'lewis6991/gitsigns.nvim',
   "ellisonleao/gruvbox.nvim",
   'nvim-lualine/lualine.nvim',
-  'numToStr/Comment.nvim',
-  'tpope/vim-sleuth',
   {
     'nvim-telescope/telescope.nvim',
     version = '*',

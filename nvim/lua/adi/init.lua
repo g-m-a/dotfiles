@@ -1,4 +1,4 @@
 require("adi.settings")
 require("adi.utils")
-require("adi.plugins")
+require("adi.lazy")
 require("adi.keymaps")
