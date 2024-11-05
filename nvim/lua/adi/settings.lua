@@ -1,3 +1,7 @@
+-- Set leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
@@ -24,7 +28,7 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme gruvbox]]
+-- vim.cmd [[colorscheme gruvbox]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -60,9 +64,10 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
       vim.cmd("syntax clear")
       vim.cmd("IlluminatePauseBuf")
       vim.cmd("NoMatchParen")
+      vim.cmd("Copilot disable")
       vim.cmd("TSContextEnable")
       if (ts_was_active) then
-	vim.notify("File larger than 1MB, turned off syntax highlighting")
+	vim.notify("File larger than 1MB, turned off many things")
       end
     end
   end
