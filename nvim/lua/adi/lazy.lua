@@ -19,7 +19,7 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
     },
-    lazy = true
+    lazy = false
   },
   {
     "folke/lazydev.nvim",
@@ -39,7 +39,7 @@ require('lazy').setup({
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
     },
-   lazy = true
+   lazy = false
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
