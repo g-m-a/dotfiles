@@ -62,7 +62,11 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
     lazy = true
   },
-  {'ThePrimeagen/harpoon', lazy = true},
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
     build = 'make',
