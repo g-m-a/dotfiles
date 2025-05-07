@@ -72,3 +72,5 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     end
   end
 })
+
+vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])

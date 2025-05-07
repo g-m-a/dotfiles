@@ -26,20 +26,21 @@ require('lazy').setup({
     ft = "lua", -- only load on lua files
     opts = {
       library = {
-       -- always load the LazyVim library
-      "LazyVim",
-      -- Only load the lazyvim library when the `LazyVim` global is found
-      { path = "LazyVim", words = { "LazyVim" } }, -- See the configuration section for more details
+        -- always load the LazyVim library
+        "LazyVim",
+        -- Only load the lazyvim library when the `LazyVim` global is found
+        { path = "LazyVim", words = { "LazyVim" } }, -- See the configuration section for more details
       },
     },
-   lazy = true
+    lazy = true
   },
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
+      "L3MON4D3/LuaSnip",
       'hrsh7th/cmp-nvim-lsp',
     },
-   lazy = false
+    lazy = false
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -111,24 +112,41 @@ require('lazy').setup({
     },
     lazy = true
   },
+  {
+    "olimorris/codecompanion.nvim",
+    opts = {},
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  },
   { "mg979/vim-visual-multi", branch= "master" },
   {
-    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
     dependencies = {
+      "mfussenegger/nvim-dap",
       "nvim-neotest/nvim-nio",
-      "rcarriga/nvim-dap-ui",
       "mxsdev/nvim-dap-vscode-js",
       {
         "microsoft/vscode-js-debug",
         branch = "main",
         opt = true,
         build = "npm ci && npm run compile vsDebugServerBundle && rm -rf out/dist && mv dist out && git reset --hard"
-      }
+      },
+      "leoluz/nvim-dap-go"
     },
     lazy = true
   },
   {
     "RRethy/vim-illuminate",
     lazy = true
-  }
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
+  },
+  { 'saadparwaiz1/cmp_luasnip' }
 }, {})
