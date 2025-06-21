@@ -74,3 +74,11 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 })
 
 vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*", -- Apply to all file types
+  callback = function()
+    vim.lsp.buf.format({ async = false }) -- Use async=false to ensure formatting completes before saving
+  end,
+})
+

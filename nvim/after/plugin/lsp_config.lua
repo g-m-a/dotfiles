@@ -5,51 +5,129 @@ local servers = {
   docker_compose_language_service = {},
   dockerls = {},
   jqls = {},
-  jsonls = {},
-  gopls = {},
+  jsonls = {
+    settings = {
+      json = {
+        schemas = require('schemastore').json.schemas(),
+        validate = { enable = true },
+      },
+    },
+  },
+  gopls = {
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      },
+    },
+  },
   pyright = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          command = "clippy",
+        },
+      },
+    },
+  },
   html = {},
   ts_ls = {
-    telemetry = { enable = false },
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        }
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        }
+      }
+    }
   },
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false, library = {
-        vim.env.VIMRUNTIME,
-        vim.env.HOME .. '.local/share/nvim/lazy',
-        vim.env.HOME .. '.local/share/nvim/mason/packages/*/lua'
-      }},
-      telemetry = { enable = false },
-      runtime = { version = 'LuaJIT' },
+    settings = {
+      Lua = {
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME,
+            vim.env.HOME .. '/.local/share/nvim/lazy',
+            vim.env.HOME .. '/.local/share/nvim/mason/packages/*/lua'
+          }
+        },
+        telemetry = { enable = false },
+        runtime = { version = 'LuaJIT' },
+        diagnostics = {
+          globals = { 'vim' },
+        },
+        completion = {
+          callSnippet = "Replace"
+        },
+      },
     },
   },
   yamlls = {
-    yaml = {
-      keyOrdering = false,
-      redhat = {
-        telemetry = false,
-      },
-      schemaStore = {
-        enable = true,
+    settings = {
+      yaml = {
+        keyOrdering = false,
+        redhat = {
+          telemetry = false,
+        },
+        schemaStore = {
+          enable = true,
+        },
       },
     },
   },
 }
 
+-- Setup capabilities for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require('mason').setup()
-local mason_lspconfig = require 'mason-lspconfig'
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      settings = servers[server_name],
-    }
-  end,
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
 }
 
-mason_lspconfig.setup { ensure_installed = vim.tbl_keys(servers), automatic_installation = false }
+-- Setup Mason
+require('mason').setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+})
+
+-- Setup LSP through Mason
+local mason_lspconfig = require('mason-lspconfig')
+
+-- Ensure specified servers are installed
+mason_lspconfig.setup({
+  automatic_enable = true,
+  ensure_installed = vim.tbl_keys(servers),
+  automatic_installation = true,
+})
+
