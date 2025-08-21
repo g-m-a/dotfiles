@@ -35,17 +35,12 @@ local cmp_config = {
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         },
-        -- Add explicit insert mapping to insert selected item with Tab when menu is visible
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                -- Only navigate in the completion menu without inserting
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            elseif has_words_before() then
-                cmp.complete()
             else
-                -- Use the default tab behavior
                 fallback()
             end
         end, { 'i', 's' }),
@@ -128,24 +123,24 @@ cmp.event:on('menu_closed', function()
     end
 end)
 
--- Use buffer source for `/` and `?` (if available)
-if has_buffer and has_cmdline then
-    cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            { name = 'buffer' }
-        }
-    })
-end
+-- -- Use buffer source for `/` and `?` (if available)
+-- if has_buffer and has_cmdline then
+--     cmp.setup.cmdline({ '/', '?' }, {
+--         mapping = cmp.mapping.preset.cmdline(),
+--         sources = {
+--             { name = 'buffer' }
+--         }
+--     })
+-- end
 
--- Use cmdline & path source for ':' (if available)
-if has_cmdline and has_path then
-    cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-            { name = 'path' }
-        }, {
-            { name = 'cmdline' }
-        })
-    })
-end
+-- -- Use cmdline & path source for ':' (if available)
+-- if has_cmdline and has_path then
+--     cmp.setup.cmdline(':', {
+--         mapping = cmp.mapping.preset.cmdline(),
+--         sources = cmp.config.sources({
+--             { name = 'path' }
+--         }, {
+--             { name = 'cmdline' }
+--         })
+--     })
+-- end
