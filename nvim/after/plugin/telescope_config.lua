@@ -15,6 +15,7 @@ require('telescope').setup {
             "--line-number",   -- Show line numbers
             "--column",        -- Show column numbers
             "--smart-case",    -- Smart case search
+            "--no-ignore",     -- Don't respect .gitignore files
 
             -- Exclude some patterns from search
             "--glob=!**/.git/*",
@@ -23,6 +24,7 @@ require('telescope').setup {
             "--glob=!**/.vscode/*",
             "--glob=!**/build/*",
             "--glob=!**/dist/*",
+            "--glob=!**/node_modules/*",
             "--glob=!**/yarn.lock",
             "--glob=!**/bun.lockb",
             "--glob=!**/package-lock.json",
@@ -37,12 +39,14 @@ require('telescope').setup {
                 "rg",
                 "--files",
                 "--hidden",
+                "--no-ignore",     -- Don't respect .gitignore files
                 "--glob=!**/.git/*",
                 "--glob=!**/.git",
                 "--glob=!**/.idea/*",
                 "--glob=!**/.vscode/*",
                 "--glob=!**/build/*",
                 "--glob=!**/dist/*",
+                "--glob=!**/node_modules/*",
                 "--glob=!**/yarn.lock",
                 "--glob=!**/bun.lockb",
                 "--glob=!**/package-lock.json",
