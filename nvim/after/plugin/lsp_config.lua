@@ -46,7 +46,10 @@ local servers = {
           includeInlayPropertyDeclarationTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
-        }
+          includeCompletionsForModuleExports = true,
+          includeCompletionsForImportStatements = true,
+          importModuleSpecifierPreference = "relative",
+        },
       },
       javascript = {
         inlayHints = {
@@ -57,6 +60,9 @@ local servers = {
           includeInlayPropertyDeclarationTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
           includeInlayEnumMemberValueHints = true,
+          includeCompletionsForModuleExports = true,
+          includeCompletionsForImportStatements = true,
+          importModuleSpecifierPreference = "relative",
         }
       }
     }
@@ -130,4 +136,3 @@ mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
   automatic_installation = true,
 })
-

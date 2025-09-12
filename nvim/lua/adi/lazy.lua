@@ -130,15 +130,6 @@ require('lazy').setup({
     },
     lazy = true
   },
-  {
-    "olimorris/codecompanion.nvim",
-    branch = "main",
-    opts = {},
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
   { "mg979/vim-visual-multi", branch = "master" },
   {
     "rcarriga/nvim-dap-ui",
