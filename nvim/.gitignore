@@ -1,1 +1,31 @@
 lazy-lock.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+.zed/
+*.swp
+*.swo
+*.bak
+
+# Dependency directories
+node_modules/
+venv/
+.env/
+__pycache__/
+
+# Build artifacts
+dist/
+build/
+*.log
+
+# Git files
+*.orig
+
+# Misc
+*.tmp
+```

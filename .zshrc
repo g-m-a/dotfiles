@@ -1,3 +1,6 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
+if [ "$TMUX" = "" ]; then tmux; fi
 [[ $- != *i* ]] && return
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -38,8 +41,6 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-alias kubectl="minikube kubectl --"
-
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
@@ -79,7 +80,8 @@ VIM="nvim"
 
 export GIT_EDITOR=$VIM
 
-bindkey -s ^f "tmux-sessionizer\n"
+bindkey -s ^o "tmux-sessionizer\n"
+bindkey -s ^p "tmux-navigator\n"
 
 source "$HOME/.cargo/env"
 
@@ -117,3 +119,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+#
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
