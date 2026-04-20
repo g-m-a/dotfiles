@@ -48,7 +48,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp-signature-help',
       'onsails/lspkind.nvim', -- VSCode-like pictograms
     },
-    event = { "InsertEnter", "CmdlineEnter" },
+    lazy = false
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -164,4 +164,5 @@ require('lazy').setup({
       require("luasnip.loaders.from_vscode").lazy_load()
     end,
   },
+  { 'kevinhwang91/nvim-ufo',  dependencies = { 'kevinhwang91/promise-async' } }
 }, {})

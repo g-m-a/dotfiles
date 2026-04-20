@@ -14,7 +14,7 @@ end
 -- Check if the debugger path exists
 local debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
 if vim.fn.isdirectory(debugger_path) == 0 then
-  vim.notify('VSCode JS debugger not found at ' .. debugger_path .. 
+  vim.notify('VSCode JS debugger not found at ' .. debugger_path ..
     '. Run `:Lazy sync` and ensure microsoft/vscode-js-debug is installed.', vim.log.levels.WARN)
   return
 end
@@ -34,9 +34,11 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
       request = "attach",
       name = "Attach to Process",
       processId = function()
-        return require('dap.utils').pick_process({ filter = function(proc)
-          return proc.name and proc.name:find("node") ~= nil and proc.name:find("--inspect") ~= nil
-        end })
+        return require('dap.utils').pick_process({
+          filter = function(proc)
+            return proc.name and proc.name:find("node") ~= nil and proc.name:find("--inspect") ~= nil
+          end
+        })
       end,
       sourceMaps = true,
       resolveSourceMapLocations = {
@@ -63,7 +65,7 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
       name = "Launch Next.js",
       cwd = "${workspaceFolder}",
       runtimeExecutable = "npm",
-      runtimeArgs = {"run", "dev"},
+      runtimeArgs = { "run", "dev" },
       sourceMaps = true,
       skipFiles = { "<node_internals>/**", "**/node_modules/**" },
       console = "integratedTerminal",
@@ -74,7 +76,7 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
       request = "launch",
       name = "Debug Jest Tests",
       runtimeExecutable = "${workspaceFolder}/node_modules/.bin/jest",
-      runtimeArgs = {"--runInBand"},
+      runtimeArgs = { "--runInBand" },
       rootPath = "${workspaceFolder}",
       cwd = "${workspaceFolder}",
       console = "integratedTerminal",
@@ -93,3 +95,4 @@ for _, language in ipairs({ "typescript", "javascript", "javascriptreact", "type
     },
   }
 end
+

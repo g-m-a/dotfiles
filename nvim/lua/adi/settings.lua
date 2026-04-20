@@ -10,7 +10,10 @@ vim.wo.number = true
 vim.o.relativenumber = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+-- vim.o.mouse = 'a'
+
+-- disable mouse scroll
+vim.o.mousescroll = "ver:0,hor:0"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -48,10 +51,11 @@ vim.o.cursorline = true
 vim.o.cursorcolumn = true
 vim.o.splitright = true
 vim.o.smarttab = true
-vim.o.grepprg = "rg --vimgrep --smart-case --follow --hidden --no-ignore-vcs --no-ignore --no-ignore-global --no-ignore-parent"
+vim.o.grepprg =
+"rg --vimgrep --smart-case --follow --hidden --no-ignore-vcs --no-ignore --no-ignore-global --no-ignore-parent"
 vim.o.autoread = true
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = "*",
   desc = "Disable syntax highlighting in files larger than 1MB",
   callback = function(args)
@@ -65,9 +69,11 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
       vim.cmd("IlluminatePauseBuf")
       vim.cmd("NoMatchParen")
       vim.cmd("Copilot disable")
-      vim.cmd("TSContextEnable")
+      if vim.fn.exists(':TSContextEnable') == 2 then
+        vim.cmd('TSContextEnable')
+      end
       if (ts_was_active) then
-	vim.notify("File larger than 1MB, turned off many things")
+        vim.notify("File larger than 1MB, turned off many things")
       end
     end
   end
@@ -76,9 +82,8 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
 vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*", -- Apply to all file types
+  pattern = "*",                          -- Apply to all file types
   callback = function()
     vim.lsp.buf.format({ async = false }) -- Use async=false to ensure formatting completes before saving
   end,
 })
-

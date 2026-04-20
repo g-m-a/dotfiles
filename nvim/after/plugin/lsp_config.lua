@@ -1,5 +1,4 @@
 local servers = {
-  clangd = {},
   bashls = {},
   cssls = {},
   docker_compose_language_service = {},
@@ -25,16 +24,8 @@ local servers = {
     },
   },
   pyright = {},
-  rust_analyzer = {
-    settings = {
-      ["rust-analyzer"] = {
-        checkOnSave = {
-          command = "clippy",
-        },
-      },
-    },
-  },
   html = {},
+  terraformls = {},
   ts_ls = {
     settings = {
       typescript = {
@@ -102,6 +93,7 @@ local servers = {
       },
     },
   },
+  biome = {}
 }
 
 -- Setup capabilities for completion
@@ -132,7 +124,16 @@ local mason_lspconfig = require('mason-lspconfig')
 
 -- Ensure specified servers are installed
 mason_lspconfig.setup({
-  automatic_enable = true,
+  automatic_enable = false,
   ensure_installed = vim.tbl_keys(servers),
   automatic_installation = true,
 })
+
+-- Setup each server with capabilities
+for server_name, server_config in pairs(servers) do
+  vim.lsp.config(server_name, {
+    capabilities = capabilities,
+    settings = server_config.settings or {},
+  })
+  vim.lsp.enable(server_name)
+end

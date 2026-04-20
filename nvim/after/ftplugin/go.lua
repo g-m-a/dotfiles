@@ -6,3 +6,6 @@ vim.bo.softtabstop = 4   -- 4 spaces when pressing tab key
 
 -- Tab behavior is now handled properly by the main cmp configuration
 -- No need for Go-specific Tab overrides that cause conflicts
+
+
+vim.keymap.set('n', '<F8>', function() require('dap-go').debug_test() end)

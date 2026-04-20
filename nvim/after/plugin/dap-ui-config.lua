@@ -62,8 +62,8 @@ dapui.setup({
     },
   },
   floating = {
-    max_height = nil, -- These can be integers or a float between 0 and 1.
-    max_width = nil, -- Floats will be treated as percentage of your screen.
+    max_height = nil,  -- These can be integers or a float between 0 and 1.
+    max_width = nil,   -- Floats will be treated as percentage of your screen.
     border = "single", -- Border style. Can be "single", "double" or "rounded"
     mappings = {
       close = { "q", "<Esc>" },
@@ -91,68 +91,65 @@ end
 -- Note: DAP signs are now configured in nvim/after/plugin/signs.lua
 
 -- Key mappings for DAP
-vim.keymap.set('n', '<leader>db', function() 
-  if ok_dap then dap.toggle_breakpoint() end 
+vim.keymap.set('n', '<leader>db', function()
+  if ok_dap then dap.toggle_breakpoint() end
 end, { desc = "Toggle Breakpoint" })
 
-vim.keymap.set('n', '<leader>dB', function() 
+vim.keymap.set('n', '<leader>dB', function()
   if ok_dap then dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
 end, { desc = "Set Conditional Breakpoint" })
 
-vim.keymap.set('n', '<leader>dl', function() 
+vim.keymap.set('n', '<leader>dl', function()
   if ok_dap then dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end
 end, { desc = "Set Log Point" })
 
-vim.keymap.set('n', '<leader>dc', function() 
-  if ok_dap then dap.continue() end 
+vim.keymap.set('n', '<F5>', function()
+  if ok_dap then dap.continue() end
 end, { desc = "Continue" })
 
-vim.keymap.set('n', '<leader>do', function() 
-  if ok_dap then dap.step_over() end 
+vim.keymap.set('n', '<F10>', function()
+  if ok_dap then dap.step_over() end
 end, { desc = "Step Over" })
 
-vim.keymap.set('n', '<leader>di', function() 
-  if ok_dap then dap.step_into() end 
+vim.keymap.set('n', '<F11>', function()
+  if ok_dap then dap.step_into() end
 end, { desc = "Step Into" })
 
-vim.keymap.set('n', '<leader>dO', function() 
-  if ok_dap then dap.step_out() end 
+vim.keymap.set('n', '<F12>', function()
+  if ok_dap then dap.step_out() end
 end, { desc = "Step Out" })
 
-vim.keymap.set('n', '<leader>dr', function() 
-  if ok_dap then dap.repl.open() end 
+vim.keymap.set('n', '<leader>dr', function()
+  if ok_dap then dap.repl.open() end
 end, { desc = "Open REPL" })
 
-vim.keymap.set('n', '<leader>dt', function() 
-  if ok_dap then dap.terminate() end 
+vim.keymap.set('n', '<leader>dt', function()
+  if ok_dap then dap.terminate() end
 end, { desc = "Terminate" })
 
-vim.keymap.set('n', '<leader>du', function() 
-  if ok_dapui then dapui.toggle() end 
+vim.keymap.set('n', '<leader>du', function()
+  if ok_dapui then dapui.toggle() end
 end, { desc = "Toggle UI" })
 
--- Keep original keymaps with warnings about deprecation
-vim.keymap.set('n', '<C-b>', function() 
-  vim.notify("Consider using <leader>db instead", vim.log.levels.WARN)
-  if ok_dap then dap.toggle_breakpoint() end
-end)
-
-vim.keymap.set('n', '<C-c>', function() 
-  vim.notify("Consider using <leader>dc instead", vim.log.levels.WARN)
-  if ok_dap then dap.continue() end
-end)
-
-vim.keymap.set('n', '<C-\'>', function() 
-  vim.notify("Consider using <leader>do instead", vim.log.levels.WARN)
-  if ok_dap then dap.step_over() end
-end)
-
-vim.keymap.set('n', '<C-;>', function() 
-  vim.notify("Consider using <leader>di instead", vim.log.levels.WARN)
-  if ok_dap then dap.step_into() end
-end)
-
-vim.keymap.set('n', '<C-:>', function() 
-  vim.notify("Consider using <leader>dO instead", vim.log.levels.WARN)
-  if ok_dap then dap.step_out() end
-end)
+-- Add session event listeners for debugging
+-- dap.listeners.after.event_initialized["debug_session"] = function(session)
+--   print("DAP session initialized: " .. (session.config.name or "unknown"))
+-- end
+--
+-- dap.listeners.after.event_terminated["debug_session"] = function(session, body)
+--   print("DAP session terminated: " .. (session.config.name or "unknown"))
+--   if body and body.reason then
+--     print("Termination reason: " .. body.reason)
+--   end
+-- end
+--
+-- dap.listeners.after.event_exited["debug_session"] = function(session, body)
+--   print("DAP session exited: " .. (session.config.name or "unknown"))
+--   if body and body.exitCode then
+--     print("Exit code: " .. body.exitCode)
+--   end
+-- end
+--
+-- -- Enable DAP logging
+-- dap.set_log_level('TRACE')
+--

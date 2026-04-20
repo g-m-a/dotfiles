@@ -1,6 +1,4 @@
-# Amazon Q pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-if [ "$TMUX" = "" ]; then tmux; fi
+# if [ "$TMUX" = "" ]; then tmux; fi
 [[ $- != *i* ]] && return
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -123,5 +121,14 @@ esac
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# Amazon Q post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+export NODE_ENV="development"
+
+alias migrate_secrets="/Users/adriangabrielli/Projects/junk/test/migrate_config.sh"
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/adriangabrielli/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
