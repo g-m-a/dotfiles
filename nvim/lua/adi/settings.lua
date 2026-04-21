@@ -82,8 +82,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 vim.cmd([[au BufRead,BufNewFile *.jq setfiletype jq]])
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",                          -- Apply to all file types
+  pattern = "*",
   callback = function()
-    vim.lsp.buf.format({ async = false }) -- Use async=false to ensure formatting completes before saving
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    for _, c in ipairs(clients) do
+      if c:supports_method('textDocument/formatting') then
+        vim.lsp.buf.format({ async = false })
+        break
+      end
+    end
   end,
 })

@@ -88,8 +88,11 @@ local servers = {
           telemetry = false,
         },
         schemaStore = {
-          enable = true,
+          -- Disable built-in schemaStore; schemas are provided by SchemaStore.nvim below
+          enable = false,
+          url = "",
         },
+        schemas = require('schemastore').yaml.schemas(),
       },
     },
   },

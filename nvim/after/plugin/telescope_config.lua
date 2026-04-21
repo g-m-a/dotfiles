@@ -1,3 +1,17 @@
+local glob_exclusions = {
+  "--glob=!**/.git/*",
+  "--glob=!**/.git",
+  "--glob=!**/.idea/*",
+  "--glob=!**/.vscode/*",
+  "--glob=!**/.next/*",
+  "--glob=!**/build/*",
+  "--glob=!**/dist/*",
+  "--glob=!**/node_modules/*",
+  "--glob=!**/yarn.lock",
+  "--glob=!**/bun.lockb",
+  "--glob=!**/package-lock.json",
+}
+
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -6,7 +20,7 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-    vimgrep_arguments = {
+    vimgrep_arguments = vim.list_extend({
       "rg",
       "--follow",        -- Follow symbolic links
       "--hidden",        -- Search for hidden files
@@ -16,44 +30,18 @@ require('telescope').setup {
       "--column",        -- Show column numbers
       "--smart-case",    -- Smart case search
       "--no-ignore",     -- Don't respect .gitignore files
-
-      -- Exclude some patterns from search
-      "--glob=!**/.git/*",
-      "--glob=!**/.git",
-      "--glob=!**/.idea/*",
-      "--glob=!**/.vscode/*",
-      "--glob=!**/.next/*",
-      "--glob=!**/build/*",
-      "--glob=!**/dist/*",
-      "--glob=!**/node_modules/*",
-      "--glob=!**/yarn.lock",
-      "--glob=!**/bun.lockb",
-      "--glob=!**/package-lock.json",
-    },
+    }, vim.deepcopy(glob_exclusions)),
   },
   pickers = {
     find_files = {
       hidden = true,
-      -- needed to exclude some files & dirs from general search
-      -- when not included or specified in .gitignore
-      find_command = {
+      find_command = vim.list_extend({
         "rg",
         "--files",
         "--hidden",
         "--no-ignore", -- Don't respect .gitignore files
-        "--glob=!**/.git/*",
-        "--glob=!**/.git",
-        "--glob=!**/.idea/*",
-        "--glob=!**/.vscode/*",
-        "--glob=!**/.next/*",
-        "--glob=!**/build/*",
-        "--glob=!**/dist/*",
-        "--glob=!**/node_modules/*",
-        "--glob=!**/yarn.lock",
-        "--glob=!**/bun.lockb",
-        "--glob=!**/package-lock.json",
-      },
+      }, vim.deepcopy(glob_exclusions)),
     },
   },
 }
-pcall(require('telescope').load_extension, 'fzf')
+-- fzf extension is loaded by lazy.nvim via the plugin's config function

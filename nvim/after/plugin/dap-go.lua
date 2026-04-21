@@ -8,16 +8,6 @@ dap_go.setup()
 
 local dap = require('dap')
 
--- Ensure the Go adapter is configured
-dap.adapters.go = {
-  type = 'server',
-  port = '${port}',
-  executable = {
-    command = 'dlv',
-    args = { 'dap', '-l', '127.0.0.1:${port}' },
-  }
-}
-
 -- Set custom configurations only
 dap.configurations.go = {
   {

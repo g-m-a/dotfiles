@@ -83,11 +83,6 @@ end
 dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
--- Set up DAP signs
-if dap.session then -- Check if dap is properly loaded
-  dap.set_log_level("TRACE")
-end
-
 -- Note: DAP signs are now configured in nvim/after/plugin/signs.lua
 
 -- Key mappings for DAP
