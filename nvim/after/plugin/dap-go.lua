@@ -4,6 +4,8 @@ if not ok then
   return
 end
 
+dap_go.setup()
+
 local dap = require('dap')
 
 -- Ensure the Go adapter is configured

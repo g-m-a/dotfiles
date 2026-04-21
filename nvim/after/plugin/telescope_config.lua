@@ -56,5 +56,4 @@ require('telescope').setup {
     },
   },
 }
-require('telescope').load_extension('harpoon')
 pcall(require('telescope').load_extension, 'fzf')

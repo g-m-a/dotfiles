@@ -126,7 +126,6 @@ local mason_lspconfig = require('mason-lspconfig')
 mason_lspconfig.setup({
   automatic_enable = false,
   ensure_installed = vim.tbl_keys(servers),
-  automatic_installation = true,
 })
 
 -- Setup each server with capabilities

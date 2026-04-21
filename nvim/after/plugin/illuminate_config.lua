@@ -2,7 +2,6 @@ require('illuminate').configure({
   -- Configuration options for vim-illuminate
   providers = {
     'lsp',
-    'treesitter',
     'regex',
   },
   delay = 100,

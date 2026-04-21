@@ -1,26 +1,8 @@
--- Setup modern diagnostic signs
-local diagnostic_signs = {
-  { name = "DiagnosticSignError", text = " ", texthl = "DiagnosticSignError" },
-  { name = "DiagnosticSignWarn",  text = " ", texthl = "DiagnosticSignWarn" },
-  { name = "DiagnosticSignHint",  text = " ", texthl = "DiagnosticSignHint" },
-  { name = "DiagnosticSignInfo",  text = " ", texthl = "DiagnosticSignInfo" },
-}
-
 -- Set the highlights
 vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ea6962" })
 vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#d8a657" })
 vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#89b482" })
 vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#7daea3" })
-
--- Create the signs configuration for diagnostic signs
-local diagnostic_signs_config = {}
-for _, sign in ipairs(diagnostic_signs) do
-  diagnostic_signs_config[vim.diagnostic.severity[sign.name:match("DiagnosticSign(%u%l+)")] or 0] = {
-    text = sign.text,
-    texthl = sign.texthl,
-    numhl = sign.texthl,
-  }
-end
 
 -- PART 2: DAP (DEBUG ADAPTER PROTOCOL) SIGNS CONFIGURATION
 -- Set up highlight groups for DAP signs
@@ -54,10 +36,20 @@ vim.diagnostic.config({
     prefix = "",
   },
   signs = {
-    active = diagnostic_signs_config,
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN]  = " ",
+      [vim.diagnostic.severity.HINT]  = " ",
+      [vim.diagnostic.severity.INFO]  = " ",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+      [vim.diagnostic.severity.WARN]  = "DiagnosticSignWarn",
+      [vim.diagnostic.severity.HINT]  = "DiagnosticSignHint",
+      [vim.diagnostic.severity.INFO]  = "DiagnosticSignInfo",
+    },
   },
   underline = true,
   update_in_insert = false,
   severity_sort = true,
 })
-

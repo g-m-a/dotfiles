@@ -17,22 +17,15 @@ require('lazy').setup({
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim' },
       'b0o/SchemaStore.nvim', -- JSON schema support
     },
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false,
   },
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
-    opts = {
-      library = {
-        -- always load the LazyVim library
-        "LazyVim",
-        -- Only load the lazyvim library when the `LazyVim` global is found
-        { path = "LazyVim", words = { "LazyVim" } }, -- See the configuration section for more details
-      },
-    },
+    opts = {},
     lazy = true
   },
   { -- Autocompletion
@@ -43,23 +36,18 @@ require('lazy').setup({
       { 'hrsh7th/cmp-nvim-lsp', branch = "main" },
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
       'onsails/lspkind.nvim', -- VSCode-like pictograms
     },
     lazy = false
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    opts = {
-      ignore_install = { "help" }
-    },
+    branch = 'main',
+    lazy = false,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
     },
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
   },
   { 'nvim-treesitter/nvim-treesitter-context', event = "BufReadPost" },
   { 'lewis6991/gitsigns.nvim',                 event = "BufReadPost" },
@@ -80,10 +68,6 @@ require('lazy').setup({
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      { "m",  function() require("harpoon"):list():add() end,                                    desc = "Mark file with harpoon" },
-      { "mm", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Harpoon menu" },
-    },
   },
   {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -100,34 +84,6 @@ require('lazy').setup({
     cmd = "Copilot",
     event = "InsertEnter",
     build = ":Copilot auth",
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        debounce = 200,
-        keymap = {
-          accept = "<S-Right>",
-          next = "<S-Down>",
-          prev = "<S-Up>",
-          dismiss = "<S-Esc>",
-        }
-      },
-      panel = {
-        enabled = true,
-        auto_refresh = false,
-        keymap = {
-          jump_prev = "[[",
-          jump_next = "]]",
-          accept = "<CR>",
-          refresh = "gr",
-          open = "<S-Left>"
-        },
-        layout = {
-          position = "right",
-          ratio = 0.2
-        },
-      },
-    },
     lazy = true
   },
   { "mg979/vim-visual-multi", branch = "master" },
@@ -160,9 +116,6 @@ require('lazy').setup({
     dependencies = {
       "rafamadriz/friendly-snippets",
     },
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
   },
   { 'kevinhwang91/nvim-ufo',  dependencies = { 'kevinhwang91/promise-async' } }
 }, {})

@@ -15,18 +15,17 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- Harpoon keymaps
-local harpoon = require("harpoon")
-vim.keymap.set('n', 'm', function() harpoon:list():add() end, {})
-vim.keymap.set('n', 'mm', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {})
-vim.keymap.set("n", "m1", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "m2", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "m3", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "m4", function() harpoon:list():select(4) end)
-vim.keymap.set("n", "m5", function() harpoon:list():select(5) end)
+vim.keymap.set('n', 'm',  function() require("harpoon"):list():add() end, {})
+vim.keymap.set('n', 'mm', function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, {})
+vim.keymap.set('n', 'm1', function() require("harpoon"):list():select(1) end)
+vim.keymap.set('n', 'm2', function() require("harpoon"):list():select(2) end)
+vim.keymap.set('n', 'm3', function() require("harpoon"):list():select(3) end)
+vim.keymap.set('n', 'm4', function() require("harpoon"):list():select(4) end)
+vim.keymap.set('n', 'm5', function() require("harpoon"):list():select(5) end)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1, float = true }) end)
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1, float = true }) end)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 

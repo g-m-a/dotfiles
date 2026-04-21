@@ -63,14 +63,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     local ts_was_active = highlighter.active[args.buf]
     local file_size = vim.fn.getfsize(args.file)
     if (file_size > 1024 * 1024) then
-      vim.cmd("TSBufDisable highlight")
+      vim.treesitter.stop(args.buf)   -- replaces old TSBufDisable highlight command
       vim.cmd("syntax off")
       vim.cmd("syntax clear")
       vim.cmd("IlluminatePauseBuf")
       vim.cmd("NoMatchParen")
       vim.cmd("Copilot disable")
-      if vim.fn.exists(':TSContextEnable') == 2 then
-        vim.cmd('TSContextEnable')
+      if vim.fn.exists(':TSContextDisable') == 2 then
+        vim.cmd('TSContextDisable')
       end
       if (ts_was_active) then
         vim.notify("File larger than 1MB, turned off many things")
