@@ -14,6 +14,13 @@ local glob_exclusions = {
 
 require('telescope').setup {
   defaults = {
+    preview = {
+      -- Neovim 0.12 stricty validates treesitter queries; a parser/query
+      -- version mismatch causes "Impossible pattern" errors in the previewer.
+      -- Disable treesitter highlighting here and rely on regex-based syntax
+      -- instead. Re-enable after running :Lazy update + :TSUpdate.
+      treesitter = false,
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,

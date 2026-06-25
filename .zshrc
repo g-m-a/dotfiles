@@ -132,3 +132,8 @@ compinit
 # End of Docker CLI completions
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/adriangabrielli/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+

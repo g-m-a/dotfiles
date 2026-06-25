@@ -19,3 +19,8 @@ export LANG=en_US.UTF-8
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.post.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bash_profile.post.bash"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/adriangabrielli/.cache/lm-studio/bin"
+# End of LM Studio CLI section
+
