@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+selected=$(tmux ls | fzf)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(echo "$selected" | cut -d: -f1)
+
+tmux_running=$(pgrep tmux)
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    exit 0
+fi
+
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    echo "Session '$selected_name' does not exist."
+    exit 1
+fi
+
+[ -n "${TMUX}" ] && tmux switch-client -t $selected_name
+[ -z "${TMUX}" ] && tmux attach-session -t $selected_name

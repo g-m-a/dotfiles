@@ -137,3 +137,4 @@ compinit
 export PATH="$PATH:/Users/adriangabrielli/.cache/lm-studio/bin"
 # End of LM Studio CLI section
 
+alias mc='mc --nosubshell'
